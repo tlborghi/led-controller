@@ -1,0 +1,92 @@
+<!--
+ *
+ * ControlLed.php
+ * 
+ * Copyright 2022 tborghi <tborghi@tborghi-lnx>
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ * 
+ * 
+ */
+
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Led Controller 2</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="generator" content="Geany 1.36" />
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- <link href="/bootstrap/css/bootstrap-switch.css" rel="stylesheet"> (it seems bootstrap 5 does not need this)-->
+    <!-- <script src="/jquery-3.3.1.js"></script> -->
+    <script  src="/javascript/jquery/jquery.js"></script>
+    <!-- <script src="/bootstrap/js/bootstrap-switch.js"></script> -->
+    <script src="/bootstrapSwitch.js"></script>
+</head>
+<script>
+	var updatePage = function(){
+		console.log("updating");
+		$.ajax({ url:"Leds2.php", method:"POST", data:{ toDo:"updatePage" }})
+			.done(function( data ) {
+				console.log("no error");
+				console.log(data);
+				var parsedData = JSON.parse(data);
+				console.log(parsedData);
+				console.log(parsedData.blueLedStatus);
+				$("#blueLedStatus").prop("checked", parsedData.blueLedStatus==="true");
+				$("#greenLedStatus").prop("checked", parsedData.greenLedStatus==="true");
+				//$("#blueLedStatus").prop("checked", false);
+			});
+	};
+
+	var setPage = function(){
+		console.log("submitting");
+			var blueLedStatus = $("#blueLedStatus").prop("checked").toString();
+			var greenLedStatus = $("#greenLedStatus").prop("checked").toString();
+			console.log(blueLedStatus);
+			console.log(greenLedStatus);
+			$.ajax({ url:"Leds2.php", method:"POST", data:{ toDo:"setLed", "blueLedStatus":blueLedStatus, "greenLedStatus":greenLedStatus }})
+				.done(function( data ) {
+					console.log("no error");
+					console.log(data);
+				});
+	};
+</script>
+	<body>
+		<h2>Blue Led:</h2>
+		<div class="form-check form-switch" >
+			<input class="form-check-input" type="checkbox" role="switch" id="blueLedStatus" >
+		</div>
+		<br>
+		<h2>Green Led (system status):</h2>
+		<div class="form-check form-switch" >
+			<input class="form-check-input" type="checkbox" role="switch" id="greenLedStatus" >
+		</div>
+		<br>
+		<!-- <button id="OkButton">Ok</button> -->
+		<button id="refreshButton">Refresh</button>
+	</body>
+	<script>
+		$("body").on("load", updatePage());
+		//$("#blueLedStatus").bootstrapSwitch();
+		//$("#OkButton").on("click", setPage);
+		$("#refreshButton").on("click", updatePage);
+		$("#greenLedStatus").change(setPage);
+		$("#blueLedStatus").change(setPage);
+	</script>
+</html>
