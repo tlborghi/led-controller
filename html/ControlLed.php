@@ -35,7 +35,7 @@
     <!-- <link href="/bootstrap/css/bootstrap-switch.css" rel="stylesheet"> (it seems bootstrap 5 does not need this)-->
     <script src="/javascript/jquery/jquery.js"></script>
     <!-- <script src="/bootstrap/js/bootstrap-switch.js"></script> -->
-    <script src="/bootstrapSwitch.js"></script>
+    <script src="/bootstrap-switch.js"></script>
 </head>
 <?php
 	require 'Leds.php';
