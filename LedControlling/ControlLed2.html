@@ -1,25 +1,25 @@
 <!--
  *
  * ControlLed.php
- * 
+ *
  * Copyright 2022 tborghi <tborghi@tborghi-lnx>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
- * 
- * 
+ *
+ *
  */
 
 -->
@@ -41,7 +41,7 @@
 <script>
 	var updatePage = function(){
 		console.log("updating");
-		$.ajax({ url:"Leds2.php", method:"POST", data:{ toDo:"updatePage" }})
+		$.ajax({ url:"ledContollerApi.php", method:"POST", data:{ toDo:"updatePage" }})
 			.done(function( data ) {
 				console.log("no error");
 				console.log(data);
@@ -60,7 +60,7 @@
 			var greenLedStatus = $("#greenLedStatus").prop("checked").toString();
 			console.log(blueLedStatus);
 			console.log(greenLedStatus);
-			$.ajax({ url:"Leds2.php", method:"POST", data:{ toDo:"setLed", "blueLedStatus":blueLedStatus, "greenLedStatus":greenLedStatus }})
+			$.ajax({ url:"ledControllerApi.php", method:"POST", data:{ toDo:"setLed", "blueLedStatus":blueLedStatus, "greenLedStatus":greenLedStatus }})
 				.done(function( data ) {
 					console.log("no error");
 					console.log(data);
