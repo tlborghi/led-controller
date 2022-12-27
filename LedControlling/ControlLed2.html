@@ -39,22 +39,25 @@
     <script src="/bootstrapSwitch.js"></script>
 </head>
 <script>
+	/**
+	 * contacts ledControllerApi for led status and updates page display
+	 */
 	var updatePage = function(){
 		console.log("updating");
-		$.ajax({ url:"ledContollerApi.php", method:"POST", data:{ toDo:"updatePage" }})
+		$.ajax({ url:"ledControllerApi.php", method:"POST", data:{ toDo:"updatePage" }})
 			.done(function( data ) {
 				console.log("no error");
-				console.log(data);
-				var parsedData = JSON.parse(data);
-				console.log(parsedData);
-				console.log(parsedData.blueLedStatus);
-				$("#blueLedStatus").prop("checked", parsedData.blueLedStatus==="true");
-				$("#greenLedStatus").prop("checked", parsedData.greenLedStatus==="true");
-				//$("#blueLedStatus").prop("checked", false);
+				console.log("data: " + JSON.stringify(data));
+				console.log("blueLedStatus: " + data.blueLedStatus);
+				$("#blueLedStatus").prop("checked", data.blueLedStatus==="true");
+				$("#greenLedStatus").prop("checked", data.greenLedStatus==="true");
 			});
 	};
 
-	var setPage = function(){
+	/**
+	 * contacts ledControllerApi to set the leds status per page settings
+	 */
+	var setLeds = function(){
 		console.log("submitting");
 			var blueLedStatus = $("#blueLedStatus").prop("checked").toString();
 			var greenLedStatus = $("#greenLedStatus").prop("checked").toString();
@@ -63,7 +66,7 @@
 			$.ajax({ url:"ledControllerApi.php", method:"POST", data:{ toDo:"setLed", "blueLedStatus":blueLedStatus, "greenLedStatus":greenLedStatus }})
 				.done(function( data ) {
 					console.log("no error");
-					console.log(data);
+					console.log(JSON.stringify(data));
 				});
 	};
 </script>
@@ -86,7 +89,7 @@
 		//$("#blueLedStatus").bootstrapSwitch();
 		//$("#OkButton").on("click", setPage);
 		$("#refreshButton").on("click", updatePage);
-		$("#greenLedStatus").change(setPage);
-		$("#blueLedStatus").change(setPage);
+		$("#greenLedStatus").change(setLeds);
+		$("#blueLedStatus").change(setLeds);
 	</script>
 </html>

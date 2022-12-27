@@ -23,13 +23,14 @@
  */
 	require 'Leds.php';
 	$serverVars = [];
+	$returnJson = [];
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$serverVars = $_POST;
 	} else if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		$serverVars = $_GET;
 	}
 	if ($serverVars["toDo"] == "setLed") {
-		echo "setting Leds";
+		//echo "setting Leds";
 		if ($serverVars["blueLedStatus"] == "true") {
 			setLed("blue", 1);
 		} else {
@@ -53,16 +54,16 @@
 		} else {
 			$greenLedStatus = "false";
 		}
-		$LedStatus = [
+		$returnJson = [
 			"blueLedStatus" => $blueLedStatus,
 			"greenLedStatus" => $greenLedStatus,
 		];
 		//echo $blueLedStatus;
 		//echo "          ";
 		//echo $greenLedStatus;
-		header("Content-Type: application/json; charset=utf-8");
-		echo json_encode($LedStatus);
 	}
+	header("Content-Type: application/json; charset=utf-8");
+	echo json_encode($returnJson);
 
 
 ?>
