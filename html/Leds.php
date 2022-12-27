@@ -27,7 +27,7 @@ $ledFilePath = [
 	"green" => "/sys/class/leds/librecomputer:system-status/brightness",
 ];
 
-$setLedCommand = "/home/jaborg/setLed";
+$setLedCommand = dirname(__FILE__)."/../src/setLed";
 
 function getLedStatus($color) {
 	global $ledFilePath;
