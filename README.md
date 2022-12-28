@@ -1,4 +1,4 @@
-This is for turning on and off the leds on a libre computer.
+This is for turning on and off the leds on a libre computer running debian bullseye using web interface.
 
 To compile src/setLed.c:
 1. go to the src directory
