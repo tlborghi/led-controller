@@ -1,25 +1,25 @@
 <?php
 /*
  * ControlLed.php
- * 
+ *
  * Copyright 2022 tborghi <tborghi@tborghi-lnx>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
- * 
- * 
+ *
+ *
  */
 
 ?>
@@ -39,32 +39,32 @@
 </head>
 <?php
 	require 'Leds.php';
-	if ($_SERVER["REQUEST_METHOD"] == "POST"){
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		//echo print_r($_Post);
-		if (empty($_POST["blueLedStatus"])){
+		if (empty($_POST["blueLedStatus"])) {
 			echo "Please enter blue led status <br>";
-		}else{
-			if ($_POST["blueLedStatus"] == "on"){
+		} else {
+			if ($_POST["blueLedStatus"] == "on") {
 				echo "Turning blue led on <br>";
 				setLed("blue", 1);
-			}else{
+			} else {
 				echo "Turning blue led off <br>";
 				setLed("blue", 0);
 			}
 		}
 		if (empty($_POST["greenLedStatus"])) {
 			echo "Please enter green led status <br>";
-		}else{
+		} else {
 			if ($_POST["greenLedStatus"] == "on") {
 				echo "Turning green led on <br>";
 				setLed("green", 1);
-			}else{
+			} else {
 				echo "Turning green led off <br>";
 				setLed("green", 0);
 			}
 		}
 	}
-	
+
 	$ledStatus = [
 		"blueOn" => "",
 		"blueOff" => "",
